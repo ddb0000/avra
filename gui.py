@@ -583,8 +583,7 @@ class AvraScreenBot(QWidget):
         # If chat session doesn't exist, create it
         if self.chat_session is None:
              try:
-                 # Use a suitable model for chat, like gemini-1.5-flash-latest
-                 self.chat_session = self.gemini_client.chats.create(model="gemini-1.5-flash-latest")
+                 self.chat_session = self.gemini_client.chats.create(model="gemini-2.5-flash-preview-04-17")
                  print("AvraScreenBot: New chat session created.")
              except Exception as e:
                   print(f"AvraScreenBot: Failed to create chat session: {e}")
