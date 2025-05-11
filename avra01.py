@@ -1,36 +1,24 @@
 import sys
 import os
 import threading
+import math 
 
-# Import necessary PyQt5 modules
-from PyQt5.QtWidgets import (QApplication, QWidget, QVBoxLayout, QLabel,
-                             QTextEdit, QInputDialog, QMenu, QAction,
-                             QSizePolicy, QShortcut, QPushButton, QFrame)
-# Import necessary QtGui modules, including QContextMenuEvent
-from PyQt5.QtGui import (QPainter, QBrush, QColor, QMouseEvent, QRadialGradient,
-                         QCursor, QContextMenuEvent, QFont, QKeySequence)
-from PyQt5.QtCore import (Qt, QRect, pyqtSignal, QThread, QPoint, QEasingCurve,
-                          QPropertyAnimation, QTimer, QEvent, QObject, QSize)
-
-import math # Needed for distance calculation
-
-# --- Adjusted Google GenAI Imports to Match Working Example ---
+from PyQt5.QtWidgets import (QApplication, QWidget, QVBoxLayout, QLabel,QTextEdit, QInputDialog, QMenu, QAction,QSizePolicy, QShortcut, QPushButton, QFrame)
+from PyQt5.QtGui import (QPainter, QBrush, QColor, QMouseEvent, QRadialGradient,QCursor, QContextMenuEvent, QFont, QKeySequence)
+from PyQt5.QtCore import (Qt, QRect, pyqtSignal, QThread, QPoint, QEasingCurve,QPropertyAnimation, QTimer, QEvent, QObject, QSize)
 from google import genai
 from google.genai import types
-# ----------------------------------------------------------
-
 from dotenv import load_dotenv
+
+# ----------------------------------------------------------
 
 load_dotenv()
 
-
 # --- Gemini API Interaction in a Separate Thread ---
 # Handles the API call off the main GUI thread to keep the GUI responsive.
-# Modified to work with a chat session and handle streaming
 
 class GeminiChatThread(QThread):
     # Signals to communicate back to the main GUI thread
-    # Modified to emit chunks for streaming
     response_chunk_signal = pyqtSignal(str)
     response_finished_signal = pyqtSignal() # Signal emitted when stream is finished
     error_signal = pyqtSignal(str) # Emits an error message
