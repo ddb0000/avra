@@ -1,3 +1,27 @@
+"""
+AVRA BOT
+General purpose assistant, GladOS / Hal 9000 / Jarvis inspired.
+
+This version is a simple desktop PyQt5 application that uses Gemini API.
+
+Next steps:
+- Add local coding capabilities.
+- Add local image generation capabilities.
+- Add "computer use", like "open a terminal and run this command".
+- Integrate with local text models: GLM4, Qwen 3 etc. (tho still behind closed source models)
+- Ditch pyqt and separate GUI from the logic. (PySide, Terminal only, etc.)
+
+Final idea is having a "brain" that can be either used directly (like terminal) or connected with some API
+The idea is that you can:
+- Download and use it all locally on a single pc
+- Use it as a server and connect to it from multiple clients (like a central brain and a wearable device)
+The brain should be better in processing but it will have a fallback to a local model if the server is not reachable or no internet on the client or server.
+The idea is fully local but OSS models are not there yet, so we will keep API connectors and try to make it agnostic.
+I believe in non-agent based monolithic system: Giving hands to the AI to create whatever it needs.
+Code is a language, so it can be used to create anything. The AI should be able to create its own tools and use them.
+
+"""
+
 import sys
 import os
 import threading
